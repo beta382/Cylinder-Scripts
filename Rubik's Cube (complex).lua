@@ -152,12 +152,15 @@ return function(page, offset, screen_width, screen_height)
     local percent = offset/page.width
     
     -- A value from 0 to 1/3 that specifies how long each row should take to complete animating
-    -- Change this and only this, hackers. If you make it larger than 1/3, weird things will happen
+    -- Change this and only this, hackers. If you make it larger than 1/3, weird things will happen.
+    -- Although, that might be exactly what you want, so I'm not doing any bounds checking. Hack away
     local animationDuration = 1/3
     
+    local magic = (1-animationDuration)/2 -- Adapted from another script. Literally is magic
+    
     local stage1P = percent*(1/animationDuration)
-    local stage2P = (percent-1/3)*(1/animationDuration)
-    local stage3P = (percent-2/3)*(1/animationDuration)
+    local stage2P = (percent-magic)*(1/animationDuration)
+    local stage3P = (percent-2*magic)*(1/animationDuration)
     
     if (offset >= 0) then
         if (stage1P > 1) then stage1P = 1
@@ -169,8 +172,8 @@ return function(page, offset, screen_width, screen_height)
         if (stage3P > 1) then stage3P = 1
         elseif (stage3P < 0) then stage3P = 0 end
     else
-        stage1P = (percent+2/3)*(1/animationDuration)
-        stage2P = (percent+1/3)*(1/animationDuration)
+        stage1P = (percent+2*magic)*(1/animationDuration)
+        stage2P = (percent+magic)*(1/animationDuration)
         stage3P = percent*(1/animationDuration)
         
         if (stage1P < -1) then stage1P = -1
