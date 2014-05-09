@@ -1,0 +1,10 @@
+Package: com.beta382.cylinderscripts
+Name: Beta382's Cylinder Animations
+Version: 1.1-1
+Priority: optional
+Section: Addons (Cylinder)
+Depends: cylinder (> 0.14.3.16)
+Architecture: iphoneos-arm
+Description: Collection of animations for Cylinder
+Author: beta382 <beta382+cylinderscripts@gmail.com>
+
